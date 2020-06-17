@@ -25,20 +25,24 @@ class SelectPlayers extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <label>Number of Players: </label>
-        <select 
-          value={this.props.opVal}
-          onChange = {this.handleSelectChange}
-        >
-          <option value="None">Choose...</option>
-          <option value="4">4</option>
-          <option value="6">6</option>
-          <option value="8">8</option>
-        </select>
-      </div>
-    )
+    if (this.props.optionsSet === false) {
+      return (
+        <div>
+          <label>Number of Players: </label>
+          <select 
+            value={this.props.opVal}
+            onChange = {this.handleSelectChange}
+          >
+            <option value="None">Choose...</option>
+            <option value="4">4</option>
+            <option value="6">6</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+      )
+    } else {
+        return null;
+    }
   }
 }
 
@@ -70,7 +74,7 @@ class NameInput extends React.Component {
       const name = "player" + (i + 1)
       inputs.push(
         <div>
-          <label for={name}>Name: </label>
+          <label htmlFor={name}>Name: </label>
           <input name={name} type="firstname" aria-required="true" value={this.props.name} onChange={this.handleNameChange} required />
         </div>
       )
@@ -79,7 +83,7 @@ class NameInput extends React.Component {
   }
   
   render() {
-    if(this.props.opVal == "None") {
+    if(this.props.opVal == "None" || this.props.optionsSet === true) {
       return null
     } else {
       return (
@@ -98,37 +102,38 @@ class NameInput extends React.Component {
  * Score
  *****************************************************************************/
 class Score extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	componentDidMount() {
-		// template
-	}
+  componentDidMount() {
+    // template
+  }
 
-	componentWillUnmount() {
-		// template
-	}
+  componentWillUnmount() {
+    // template
+  }
 
-	render() {
-		if (this.props.optionsSet === false) {
-			// do not render the score
-			return null;
-		} else {
-			let scores = [];
+  render() {
+    if (this.props.optionsSet === false) {
+      // do not render the score
+      return null;
+    } else {
+      let scores = [];
 
-			for(const player in this.props.players) {
-				scores.push(
-					<div>
-						<p>{this.props.players[player]}</p>
-						<p>Score Placeholder</p>
-					</div>
-				);
-			}
-			console.log(scores);
-			return scores;
-		}
-	}
+      for(const player in this.props.players) {
+        scores.push(
+          <div>
+            <p>{this.props.players[player]}</p>
+            <p>Score Placeholder</p>
+          </div>
+        );
+      }
+
+      console.log(scores);
+      return scores;
+    }
+  }
 }
 
 /******************************************************************************
@@ -139,11 +144,10 @@ class HandAndFootApp extends React.Component {
     super(props)
 
     this.state = {
-    	opVal: "None",
-    	players: [],
-    	optionsSet: false
+      opVal: "None",
+      players: [],
+      optionsSet: false
     }
-
 
     this.handleSelectChange = this.handleSelectChange.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
@@ -156,11 +160,11 @@ class HandAndFootApp extends React.Component {
   
   handleNameChange(event) {
     this.setState({
-    	players: {
-    		...this.state.players,
-    		[event.target.name]: event.target.value
-    	}
-	}, () =>
+      players: {
+        ...this.state.players,
+        [event.target.name]: event.target.value
+      }
+    }, () =>
       console.log(this.state)
     )
   }
@@ -172,10 +176,10 @@ class HandAndFootApp extends React.Component {
          "\nInput Name 2: " + this.state["inputName2"] + 
          "\nInput Name 3: " + this.state["inputName3"] + 
          "\nInput Name 4: " + this.state["inputName4"]);
-	*/
-	this.setState( {optionsSet: true}, () => console.log(this.state.optionsSet))
+    */
+    this.setState( {optionsSet: true}, () => console.log(this.state.optionsSet))
 
-	console.log(this.state);
+    console.log(this.state);
   }
   
   render() {
@@ -183,17 +187,19 @@ class HandAndFootApp extends React.Component {
       <div>
         <SelectPlayers
           opVal = {this.state.opVal}
+          optionsSet = {this.state.optionsSet}
           onSelectChange = {this.handleSelectChange}
         />
         <NameInput 
           opVal = {this.state.opVal}
+          optionsSet = {this.state.optionsSet}
           onNameChange = {this.handleNameChange}
           onSubmitForm = {this.handleSubmit}
         />
         <Score
-        	players = {this.state.players}
-        	optionsSet = {this.state.optionsSet}
-    	/>
+          players = {this.state.players}
+          optionsSet = {this.state.optionsSet}
+        />
       </div>
     )
   }
