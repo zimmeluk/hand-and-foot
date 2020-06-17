@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<script type="text/babel">
+
+/******************************************************************************
+ * SelectPlayers
+ *
+ * Select the number of players that are playing hand and foot.
+ * Choose between 4, 6, or 8 players.
+ *****************************************************************************/
+class SelectPlayers extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+  }
+  
+  handleSelectChange(e) {
+    this.props.onSelectChange(e.target.value)
+  }
+
+  render() {
+    return (
+      <div>
+        <label>Number of Players: </label>
+        <select 
+          value={this.props.opVal}
+          onChange = {this.handleSelectChange}
+        >
+          <option value="None">Choose...</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    )
+  }
+}
+
+/******************************************************************************
+ * NameInput
+ *****************************************************************************/
+class NameInput extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  
+  handleNameChange(e) {
+    this.props.onNameChange(e)
+  }
+  
+  handleSubmit(e) {
+    this.props.onSubmitForm(e)
+  }
+  
+  createInputs() {
+    let inputs = []
+    
+    for(let i = 0; i < this.props.opVal; i++) {
+      if(i % 2 == 0) {
+        inputs.push(<h3>Group {(i + 2) / 2}</h3>)
+      }
+      const name = "player" + (i + 1)
+      inputs.push(
+        <div>
+          <label for={name}>Name: </label>
+          <input name={name} type="firstname" aria-required="true" value={this.props.name} onChange={this.handleNameChange} required />
+        </div>
+      )
+    }
+    return inputs
+  }
+  
+  render() {
+    if(this.props.opVal == "None") {
+      return null
+    } else {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          {this.createInputs()}
+          <div>
+            <button>Start Game</button>
+          </div>
+        </form>
+      )
+    }
+  }
+}
+
+/******************************************************************************
+ * Score
+ *****************************************************************************/
+class Score extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	componentDidMount() {
+		// template
+	}
+
+	componentWillUnmount() {
+		// template
+	}
+
+	render() {
+		if (this.props.optionsSet === false) {
+			// do not render the score
+			return null;
+		} else {
+			let scores = [];
+
+			for(const player in this.props.players) {
+				scores.push(
+					<div>
+						<p>{this.props.players[player]}</p>
+						<p>Score Placeholder</p>
+					</div>
+				);
+			}
+			console.log(scores);
+			return scores;
+		}
+	}
+}
+
+/******************************************************************************
+ * HandAndFootApp
+ *****************************************************************************/
+class HandAndFootApp extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+    	opVal: "None",
+    	players: [],
+    	optionsSet: false
+    }
+
+
+    this.handleSelectChange = this.handleSelectChange.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  
+  handleSelectChange(opVal) {
+    this.setState( {opVal: opVal}, () => console.log(this.state.opVal) )
+  }
+  
+  handleNameChange(event) {
+    this.setState({
+    	players: {
+    		...this.state.players,
+    		[event.target.name]: event.target.value
+    	}
+	}, () =>
+      console.log(this.state)
+    )
+  }
+  
+  handleSubmit(event) {
+    event.preventDefault();
+    /*
+    alert("Input Name 1: " + this.state["inputName1"] + 
+         "\nInput Name 2: " + this.state["inputName2"] + 
+         "\nInput Name 3: " + this.state["inputName3"] + 
+         "\nInput Name 4: " + this.state["inputName4"]);
+	*/
+	this.setState( {optionsSet: true}, () => console.log(this.state.optionsSet))
+
+	console.log(this.state);
+  }
+  
+  render() {
+    return (
+      <div>
+        <SelectPlayers
+          opVal = {this.state.opVal}
+          onSelectChange = {this.handleSelectChange}
+        />
+        <NameInput 
+          opVal = {this.state.opVal}
+          onNameChange = {this.handleNameChange}
+          onSubmitForm = {this.handleSubmit}
+        />
+        <Score
+        	players = {this.state.players}
+        	optionsSet = {this.state.optionsSet}
+    	/>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(
+  <HandAndFootApp />,
+  document.getElementById('root')
+)
+</script>
+
+<h1>Hand and Foot</h1>
+
+<div id="root"></div>
