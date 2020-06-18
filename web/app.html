@@ -100,28 +100,16 @@ class NameInput extends React.Component {
 
 /******************************************************************************
  * Player
+ *
+ * Arrow function component that displays information related to a player.
  *****************************************************************************/
-class Player extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    // template
-  }
-
-  componentWillUnmount() {
-    // template
-  }
-
-  render() {
-    return (
-      <div>
-        <p>{this.props.player.name} - {this.props.player.score}</p>
-      </div>
-    )
-  }
-}
+const Player = ({player}) => {
+  return (
+    <div>
+      <p>{player.name}: {player.score}</p>
+    </div>
+  );
+};
 
 /******************************************************************************
  * Group
