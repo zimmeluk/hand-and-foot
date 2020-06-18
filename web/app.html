@@ -99,6 +99,51 @@ class NameInput extends React.Component {
 }
 
 /******************************************************************************
+ * Player
+ *****************************************************************************/
+class Player extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    // template
+  }
+
+  componentWillUnmount() {
+    // template
+  }
+
+  render() {
+    return (
+      <div>
+        <p>{this.props.player.name} - {this.props.player.score}</p>
+      </div>
+    )
+  }
+}
+
+/******************************************************************************
+ * Group
+ * 
+ * A group consists of two players.
+ *****************************************************************************/
+class Group extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    // template
+  }
+
+  componentWillUnmount() {
+    // template
+  }
+}
+
+
+/******************************************************************************
  * Score
  *****************************************************************************/
 class Score extends React.Component {
@@ -124,13 +169,10 @@ class Score extends React.Component {
       for(const player in this.props.players) {
         scores.push(
           <div>
-            <p>{this.props.players[player]}</p>
-            <p>Score Placeholder</p>
+            <Player player={this.props.players[player]} />
           </div>
         );
       }
-
-      console.log(scores);
       return scores;
     }
   }
@@ -162,7 +204,46 @@ class HandAndFootApp extends React.Component {
     this.setState({
       players: {
         ...this.state.players,
-        [event.target.name]: event.target.value
+        [event.target.name]: {
+          name: event.target.value,
+          score: 0,
+          round1: {
+            pick22: 0,
+            out: 0,
+            black: 0,
+            red: 0,
+            wild: 0,
+            points: 0,
+            score: 0
+          },
+          round2: {
+            pick22: 0,
+            out: 0,
+            black: 0,
+            red: 0,
+            wild: 0,
+            points: 0,
+            score: 0
+          },
+          round3: {
+            pick22: 0,
+            out: 0,
+            black: 0,
+            red: 0,
+            wild: 0,
+            points: 0,
+            score: 0
+          },
+          round4: {
+            pick22: 0,
+            out: 0,
+            black: 0,
+            red: 0,
+            wild: 0,
+            points: 0,
+            score: 0
+          }
+        }
       }
     }, () =>
       console.log(this.state)
@@ -171,12 +252,6 @@ class HandAndFootApp extends React.Component {
   
   handleSubmit(event) {
     event.preventDefault();
-    /*
-    alert("Input Name 1: " + this.state["inputName1"] + 
-         "\nInput Name 2: " + this.state["inputName2"] + 
-         "\nInput Name 3: " + this.state["inputName3"] + 
-         "\nInput Name 4: " + this.state["inputName4"]);
-    */
     this.setState( {optionsSet: true}, () => console.log(this.state.optionsSet))
 
     console.log(this.state);
