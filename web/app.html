@@ -165,8 +165,9 @@ class ScoreInput extends React.Component {
     if(this.props.inputType == 'checkbox') {
       return <input type="checkbox"></input>
     } else if (this.props.inputType == 'select') {
+      console.log(this.props.playerObj);
       return (
-        <select value="0"
+        <select value={this.props.playerObj[this.props.round][this.props.category]}
          onChange={(e) => this.scoreSelectChange(
            this.props.player, this.props.round, this.props.category, e)}
         >
@@ -215,7 +216,7 @@ class RoundScore extends React.Component {
     for(const player in this.props.players) {
       table.push(
         <td>
-          <ScoreInput player={player} round={this.round}
+          <ScoreInput playerObj={this.props.players[player]} player={player} round={this.round}
                       category={category} inputType={type}
                       scoreSelectChange={this.scoreSelectChange}/>
         </td>
@@ -411,6 +412,7 @@ class HandAndFootApp extends React.Component {
     var newVal = 1;
     console.log(val);
     
+    /*
     if(category == "black") {
       newVal = val * 300;
     } else if(category == "red") {
@@ -418,6 +420,7 @@ class HandAndFootApp extends React.Component {
     } else if(category == "wild") {
       newVal = val * 2000;
     }
+    */
 
     console.log(newVal);
 
@@ -428,7 +431,7 @@ class HandAndFootApp extends React.Component {
           ...this.state.players[player],
           [round]: {
             ...this.state.players[player][round],
-            [category]: newVal
+            [category]: val
           }
         }
       }
