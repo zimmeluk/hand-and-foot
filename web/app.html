@@ -397,8 +397,7 @@ class HandAndFootApp extends React.Component {
         }
       }
     }, () =>
-      console.log(this.state)
-    )
+      console.log("Hey!"));
   }
   
   handleSubmit(event) {
@@ -409,33 +408,65 @@ class HandAndFootApp extends React.Component {
   }
 
   scoreSelectChange(player, round, category, val) {
-    var newVal = 1;
-    console.log(val);
-    
-    /*
-    if(category == "black") {
-      newVal = val * 300;
-    } else if(category == "red") {
-      newVal = val * 500;
-    } else if(category == "wild") {
-      newVal = val * 2000;
-    }
-    */
+    let roundSum = 0;
+    let gameSum = 0;
 
-    console.log(newVal);
+    // sum the round score and save the state
+    for(let score in this.state.players[player][round]) {
+      let updVal = this.state.players[player][round][score];
+
+      // if updated category, use updated score
+      if (score == category) {
+        updVal = val;
+      }
+
+      switch(score) {
+        case "black":
+          roundSum += (updVal * 300);
+          break;
+        case "red":
+          roundSum += (updVal * 500);
+          break;
+        case "wild":
+          roundSum += (updVal * 2000);
+          break;
+      }
+    }
+    
+    // sum the game score and save the state
+    for(let gameRound in this.state.players[player]) {
+      let roundScore = this.state.players[player][gameRound]["score"];
+
+      // TODO: change state structure
+      if(gameRound == "name" || gameRound == "score") {
+        continue;
+      }
+
+      // if current round, use updated score
+      if(gameRound == round) {
+        roundScore = roundSum;
+      }
+
+      gameSum += roundScore;
+    }
+
+    console.log(roundSum);
+    console.log(gameSum);
 
     this.setState({
       players: {
         ...this.state.players,
         [player]: {
           ...this.state.players[player],
+          score: gameSum,
           [round]: {
             ...this.state.players[player][round],
+            score: roundSum,
             [category]: val
           }
         }
       }
-    }, () => console.log(this.state));
+    });
   }
 
   resetGame() {
