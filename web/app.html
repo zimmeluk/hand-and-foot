@@ -158,14 +158,20 @@ class ScoreInput extends React.Component {
   }
 
   scoreSelectChange(player, round, category, e) {
-    this.props.scoreSelectChange(player, round, category, e.target.value);
+    if(this.props.inputType == 'checkbox') {
+      this.props.scoreSelectChange(player, round, category, e.target.checked ? 1 : 0);
+    } else if(this.props.inputType == 'select') {
+      this.props.scoreSelectChange(player, round, category, e.target.value);
+    } else {
+      this.props.scoreSelectChange(player, round, category, e.target.value);
+    }
   }
 
   render() {
     if(this.props.inputType == 'checkbox') {
-      return <input type="checkbox"></input>
+      let checkBoxVal = this.props.playerObj[this.props.round][this.props.category] == 1 ? true : false;
+      return <input type="checkbox" defaultChecked={checkBoxVal} onChange={(e) => this.scoreSelectChange(this.props.player, this.props.round, this.props.category, e)}></input>
     } else if (this.props.inputType == 'select') {
-      console.log(this.props.playerObj);
       return (
         <select value={this.props.playerObj[this.props.round][this.props.category]}
          onChange={(e) => this.scoreSelectChange(
@@ -181,7 +187,7 @@ class ScoreInput extends React.Component {
         </select>
       );
     } else if (this.props.inputType == 'number') {
-      return <input type="number" min="0" max="1000"></input>
+      return <input type="number" min="0" max="1000" value={this.props.playerObj[this.props.round][this.props.category]} onChange={(e) => this.scoreSelectChange(this.props.player, this.props.round, this.props.category, e)}></input>
     }
   }
 }
@@ -250,7 +256,7 @@ class RoundScore extends React.Component {
         <tbody>
           <tr>
             <th scope="row">Draw 22</th>
-            {this.createInputs("draw22", "checkbox")}
+            {this.createInputs("pick", "checkbox")}
           </tr>
           <tr>
             <th scope="row">Out</th>
@@ -359,7 +365,7 @@ class HandAndFootApp extends React.Component {
           name: event.target.value,
           score: 0,
           round1: {
-            pick22: 0,
+            pick: 0,
             out: 0,
             black: 0,
             red: 0,
@@ -368,7 +374,7 @@ class HandAndFootApp extends React.Component {
             score: 0
           },
           round2: {
-            pick22: 0,
+            pick: 0,
             out: 0,
             black: 0,
             red: 0,
@@ -377,7 +383,7 @@ class HandAndFootApp extends React.Component {
             score: 0
           },
           round3: {
-            pick22: 0,
+            pick: 0,
             out: 0,
             black: 0,
             red: 0,
@@ -386,7 +392,7 @@ class HandAndFootApp extends React.Component {
             score: 0
           },
           round4: {
-            pick22: 0,
+            pick: 0,
             out: 0,
             black: 0,
             red: 0,
@@ -421,6 +427,12 @@ class HandAndFootApp extends React.Component {
       }
 
       switch(score) {
+        case "pick":
+          roundSum += (updVal * 100);
+          break;
+        case "out":
+          roundSum += (updVal * 100);
+          break;
         case "black":
           roundSum += (updVal * 300);
           break;
@@ -429,6 +441,11 @@ class HandAndFootApp extends React.Component {
           break;
         case "wild":
           roundSum += (updVal * 2000);
+          break;
+        case "points":
+          roundSum += parseInt(updVal);
+          break;
+        default:
           break;
       }
     }
@@ -449,9 +466,6 @@ class HandAndFootApp extends React.Component {
 
       gameSum += roundScore;
     }
-
-    console.log(roundSum);
-    console.log(gameSum);
 
     this.setState({
       players: {
