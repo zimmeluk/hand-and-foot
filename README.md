@@ -1,7 +1,23 @@
 # hand-and-foot
 
-Keep score of the classic Hand and Foot card game.
+Keep score of the classic Hand and Foot card game. The repository contains both a `web` and `native` version of the application.
 
+## Prerequisites
+### Install Node
+Refer to the [Node website](https://nodejs.org/en/) to install node or use `npm`.
+
+Install node globally
+```bash
+[sudo] npm install node -g
+```
+
+Check node installation
+```bash
+node -v
+```
+
+## Documentation
+### Components
 
 ## Development
 - [ ] Create Issues
@@ -9,5 +25,4 @@ Keep score of the classic Hand and Foot card game.
 - [ ] GitHub Actions
 - [ ] Add Rounds
 - [ ] Responsive Table
-- [ ] Refactor Code
 - [ ] Build React Native App
