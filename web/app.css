@@ -1,0 +1,37 @@
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.5em;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: mediumseagreen;
+}
+
+h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    color: mediumseagreen;
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+}
+
+.name-input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input[type=firstname] {
+    padding: 5px 5px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+}
+
+input[type=firstname]:focus {
+    border: 2px solid #333;
+    background-color: #eee;
+}

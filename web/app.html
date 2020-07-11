@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="app.css">
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -73,7 +74,7 @@ class NameInput extends React.Component {
       }
       const name = "player" + (i + 1)
       inputs.push(
-        <div>
+        <div className="name-input">
           <label htmlFor={name}>Name: </label>
           <input name={name} type="firstname" aria-required="true" value={this.props.name} onChange={this.handleNameChange} required />
         </div>
