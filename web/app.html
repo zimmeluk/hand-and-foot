@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Hand and Foot</title>
     <link rel="stylesheet" type="text/css" href="app.css">
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
@@ -107,7 +108,9 @@ class NameInput extends React.Component {
 const Player = ({player}) => {
   return (
     <div>
-      <p>{player.name}: {player.score}</p>
+      <p className="player">{player.name}
+        <span className="player-score"> {player.score}</span>
+      </p>
     </div>
   );
 };

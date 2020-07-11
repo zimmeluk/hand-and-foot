@@ -35,3 +35,33 @@ input[type=firstname]:focus {
     border: 2px solid #333;
     background-color: #eee;
 }
+
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.125em;
+    margin: 10px 0px;
+    padding: 10px 25px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border: 2px solid mediumseagreen;
+    border-radius: 10px;
+    transition-duration: 0.25s;
+}
+
+button:hover {
+    background-color: mediumseagreen;
+    color: white;
+}
+
+.player {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.125em;
+  color: black;
+}
+
+.player-score {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  color: black;
+}
