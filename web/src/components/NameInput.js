@@ -22,7 +22,7 @@ export default class NameInput extends React.Component {
     let inputs = []
     
     for(let i = 0; i < this.props.opVal; i++) {
-      if(i % 2 == 0) {
+      if(i % 2 === 0) {
         inputs.push(<h3>Group {(i + 2) / 2}</h3>)
       }
       const name = "player" + (i + 1)
@@ -37,7 +37,7 @@ export default class NameInput extends React.Component {
   }
   
   render() {
-    if(this.props.opVal == "None" || this.props.optionsSet === true) {
+    if(this.props.opVal === "None" || this.props.optionsSet === true) {
       return null
     } else {
       return (

@@ -94,7 +94,7 @@ export default class HandAndFootApp extends React.Component {
      let updVal = this.state.players[player][round][score];
 
      // if updated category, use updated score
-     if (score == category) {
+     if (score === category) {
        updVal = val;
      }
 
@@ -127,12 +127,12 @@ export default class HandAndFootApp extends React.Component {
      let roundScore = this.state.players[player][gameRound]["score"];
 
      // TODO: change state structure
-     if(gameRound == "name" || gameRound == "score") {
+     if(gameRound === "name" || gameRound === "score") {
        continue;
      }
 
      // if current round, use updated score
-     if(gameRound == round) {
+     if(gameRound === round) {
        roundScore = roundSum;
      }
 

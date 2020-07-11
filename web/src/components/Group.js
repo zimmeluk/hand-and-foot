@@ -7,9 +7,9 @@ import Player from './Player';
  * A group consists of two players.
  *****************************************************************************/
 export default class Group extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     // template
