@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/hand-and-foot/static/css/main.4177cd34.chunk.css",
+    "main.js": "/hand-and-foot/static/js/main.709eb32f.chunk.js",
+    "main.js.map": "/hand-and-foot/static/js/main.709eb32f.chunk.js.map",
+    "runtime-main.js": "/hand-and-foot/static/js/runtime-main.2503df06.js",
+    "runtime-main.js.map": "/hand-and-foot/static/js/runtime-main.2503df06.js.map",
+    "static/js/2.e6d94bea.chunk.js": "/hand-and-foot/static/js/2.e6d94bea.chunk.js",
+    "static/js/2.e6d94bea.chunk.js.map": "/hand-and-foot/static/js/2.e6d94bea.chunk.js.map",
+    "index.html": "/hand-and-foot/index.html",
+    "precache-manifest.0493c9cd137fe6076da851d990aebdd6.js": "/hand-and-foot/precache-manifest.0493c9cd137fe6076da851d990aebdd6.js",
+    "service-worker.js": "/hand-and-foot/service-worker.js",
+    "static/css/main.4177cd34.chunk.css.map": "/hand-and-foot/static/css/main.4177cd34.chunk.css.map",
+    "static/js/2.e6d94bea.chunk.js.LICENSE.txt": "/hand-and-foot/static/js/2.e6d94bea.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2503df06.js",
+    "static/js/2.e6d94bea.chunk.js",
+    "static/css/main.4177cd34.chunk.css",
+    "static/js/main.709eb32f.chunk.js"
+  ]
+}
