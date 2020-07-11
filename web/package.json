@@ -2,6 +2,7 @@
   "name": "hand-and-foot",
   "version": "1.0.0",
   "private": true,
+  "homepage": "http://zimmeluk.github.io/hand-and-foot",
   "repository": {
     "type": "git",
     "url": "https://github.com/zimmeluk/hand-and-foot.git"
@@ -15,7 +16,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   },
   "browserslist": [
     "defaults",
