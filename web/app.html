@@ -129,6 +129,18 @@ class Group extends React.Component {
   componentWillUnmount() {
     // template
   }
+
+  render() {
+    const player1 = this.props.player1;
+    const player2 = this.props.player2;
+    return (
+      <div>
+        <h3>Group {this.props.groupName}: {this.props.players[player1]["score"] + this.props.players[player2]["score"]}</h3>
+        <Player player={this.props.players[player1]} />
+        <Player player={this.props.players[player2]} />
+      </div>
+    );
+  }
 }
 
 /******************************************************************************
@@ -145,9 +157,6 @@ class Group extends React.Component {
 class ScoreInput extends React.Component {
   constructor(props) {
     super(props);
-    // this.scoreCheckboxChange = this.scoreCheckboxChange.bind(this);
-    // this.scoreSelectChange = this.scoreSelectChange.bind(this);
-    // this.scorePointChange = this.scorePointChange.bind(this);
   }
 
   componentDidMount() {
@@ -314,12 +323,13 @@ class Score extends React.Component {
     } else {
       let scores = [];
 
-      for(const player in this.props.players) {
+
+      for(let i = 0; i < this.props.opVal; i += 2) {
+        const name1 = "player" + (i + 1);
+        const name2 = "player" + (i + 2);
         scores.push(
-          <div>
-            <Player player={this.props.players[player]} />
-          </div>
-        );
+          <Group groupName={(i + 2) / 2} players={this.props.players} player1={name1} player2={name2} />
+        )
       }
 
       return (
@@ -511,6 +521,7 @@ class HandAndFootApp extends React.Component {
           onSubmitForm = {this.handleSubmit}
         />
         <Score
+          opVal = {this.state.opVal}
           players = {this.state.players}
           optionsSet = {this.state.optionsSet}
           scoreSelectChange = {this.scoreSelectChange}
