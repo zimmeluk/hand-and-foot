@@ -1,5 +1,7 @@
 # hand-and-foot
 
+![Node.js CI](https://github.com/zimmeluk/hand-and-foot/workflows/Node.js%20CI/badge.svg)
+
 Keep score of the classic Hand and Foot card game. The repository contains both a `web` and `native` version of the application.
 
 ## Prerequisites
